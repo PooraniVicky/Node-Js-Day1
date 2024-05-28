@@ -16,10 +16,10 @@ function getFormattedFileName() {
 app.post('/createFile', async (req, res) => {
     try {
         await fs.ensureDir(folderPath)
-        const time = getFormattedFileName
+        const time = getFormattedFileName();
         const fileName = `${time}.txt`;
         const filePath = path.join(folderPath, fileName);
-        fs.writeFile(filePath, time);
+        await fs.writeFile(filePath, time);
         res.send("File Created Successfully..!")
     } catch (error) {
         res.status(500).send("Error Writing a file", error);
