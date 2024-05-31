@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
-require("dotenv").config();
+// require("dotenv").config();
 const app = express();
-const PORT = process.env.PORT;
+const PORT = 3000;
 // const MONGODB = process.env.MONGODB;
 
 app.use(cors());
@@ -16,19 +16,13 @@ app.use(bodyParser.json());
 app.use("/apiUser", userRoutes);
 
 mongoose
-  .connect(process.env.MONGODB)
+  .connect('mongodb+srv://poorani:poorani@poorani.vdwsoet.mongodb.net/user-crud')
   .then(() => {
     console.log("connected to MongoDB");
-    app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.error("Conection error", error.message);
+    console.error("Connection error", error.message);
   });
-// app.get("/app", (req, res)=>{
-//     res.json(displayName("Poorani", "Vignesh"));
-// })
-// const displayName = (firstName, lastName)=>{
-//     return`Hey, ${firstName}, ${lastName}!!!`;
-// }
